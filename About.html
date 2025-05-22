@@ -720,7 +720,7 @@
         }
 
         /* Animations */
-        @keyframes fadeInUp {
+           @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -730,6 +730,16 @@
                 transform: translateY(0);
             }
         }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
