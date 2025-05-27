@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact TEKK Bridge Academy for inquiries, support, or partnership opportunities. We're here to help!">
+
+    <title>Contact Us - TEKK Bridge Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8d4;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-light: 0 8px 32px rgba(102, 126, 234, 0.15);
+            --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient-1 {
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-gradient-2 {
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        
+        /* Navigation - Mobile Friendly */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(15, 15, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 15, 35, 0.95);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Styles for the logo container */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Style for the logo icon container */
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* Style for the logo image to fit inside */
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Header */
+        .header {
+            padding: 8rem 0 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            padding: 1rem 0;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .info-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            word-break: break-all;
+        }
+
+        .info-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Map Section */
+        .map-section {
+            margin-top: 2rem;
+        }
+
+        .map-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .map-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-color);
+        }
+
+        .map-placeholder-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Form Validation Styles */
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu .nav-menu {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu .nav-link {
+            font-size: 1.2rem;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .header {
+                padding: 10rem 0 3rem;
+            }
+            
+            .header-title {
+                font-size: 3rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                margin-bottom: 4rem;
+            }
+            
+            .contact-form,
+            .info-card {
+                padding: 2rem;
+            }
+            
+            .map-placeholder {
+                height: 350px;
+            }
+        }
+
+        @media (min-width: 968px) {
+            .contact-grid {
+                gap: 4rem;
+                margin-bottom: 6rem;
+            }
+            
+            .contact-form,
+            .info-card {
+                padding: 3rem;
+                border-radius: 20px;
+            }
+            
+            .map-container {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .map-placeholder {
+                height: 400px;
+            }
+            
+            .header {
+                padding: 12rem 0 4rem;
+            }
+            
+            .header-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .logo span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <img src="/images/Logo.png" alt="Logo">
+                </div>
+                <span>TEKK Bridge</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html" class="nav-link">Features</a></li>
+                <li><a href="/index.html" class="nav-link">Leaders</a></li>
+                <li><a href="/About.html" class="nav-link">About</a></li>
+                <li><a href="/enroll.html" class="nav-link">Enroll</a></li>
+                <li><a href="/contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html" class="nav-link">Features</a></li>
+            <li><a href="#Leadership" class="nav-link">Leaders</a></li>
+            <li><a href="About.html" class="nav-link active">About</a></li>
+            <li><a href="/enroll.html" class="nav-link">Enroll</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">Get In Touch</h1>
+            <p class="header-subtitle">
+                Ready to transform your future? We're here to help you start your journey with TEKK Bridge Academy.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Contact Grid -->
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2 class="form-title">Send us a Message</h2>
+                    <div class="success-message" id="successMessage">
+                        Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                            <div class="error-message" id="nameError">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest" class="form-label">Area of Interest</label>
+                            <select id="interest" name="interest" class="form-select">
+                                <option value="">Select a program</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="cybersecurity">Cybersecurity</option>
+                                <option value="mobile-development">Mobile Development</option>
+                                <option value="ai-ml">AI & Machine Learning</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tell us about your goals and how we can help you..." required></textarea>
+                            <div class="error-message" id="messageError">Please enter your message</div>
+                        </div>
+                        
+                        <button type="submit" class="form-button">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="info-title">Visit Our Campus</h3>
+                        <p class="info-text">
+                           No 7 bus stop Old<br>
+                            Road Nekede, Owerri <br>
+                             Imo state
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="info-title">Call Us</h3>
+                        <p class="info-text">
+                            Main: <a href="tel:+1-555-0123" class="info-link">+234 803 450 0532</a><br>
+                            Admissions: <a href="tel:+1-555-0124" class="info-link">+234 803 450 0532</a>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="info-title">Email Us</h3>
+                        <p class="info-text">
+                            General: <a href="mailto:info@tekkbridge.edu" class="info-link">Tekkbridgeco@gmail.com</a><br>
+                            Admissions: <a href="mailto:admissions@tekkbridge.edu" class="info-link">Tekkbridgeco@gmail.com</a>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="info-title">Office Hours</h3>
+                        <p class="info-text">
+                            Monday - Friday: 8:00 AM - 6:00 PM<br>
+                            Saturday: 9:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section">
+                <div class="map-container">
+                    <h2 class="map-title">Find Us on the Map</h2>
+                    <div class="map-placeholder">
+                    <div class="map-placeholder-text" style="width: 100%; height: 400px;">      
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.607383044704!2d7.030284573581687!3d5.476367034448231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10425911bd75f833%3A0x5ecfd2de239eab85!2sNekede%20Road!5e0!3m2!1sen!2sng!4v1748259580820!5m2!1sen!2sng"></iframe>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+mobileMenuToggle.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+mobileMenuClose.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close mobile menu when clicking on a link
+const mobileLinks = document.querySelectorAll('.mobile-menu .nav-link');
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+});
+
+        // Form validation and submission
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset previous errors
+            clearErrors();
+            
+            // Validate form
+            let isValid = true;
+            
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            
+            if (!name.value.trim()) {
+                showError('name', 'nameError', 'Please enter your full name');
+                isValid = false;
+            }
+            
+            if (!email.value.trim()) {
+                showError('email', 'emailError', 'Please enter your email address');
+                isValid = false;
+            } else if (!isValidEmail(email.value)) {
+                showError('email', 'emailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!message.value.trim()) {
+                showError('message', 'messageError', 'Please enter your message');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulate form submission
+                setTimeout(() => {
+                    successMessage.style.display = 'block';
+                    contactForm.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }, 500);
+            }
+        });
+
+        function showError(inputId, errorId, message) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(errorId);
+            
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearErrors() {
+            const inputs = document.querySelectorAll('.form-input, .form-textarea, .form-select');
+            const errors = document.querySelectorAll('.error-message');
+            
+            inputs.forEach(input => input.classList.remove('error'));
+            errors.forEach(error => error.style.display = 'none');
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Real-time validation
+        document.getElementById('name').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('name', 'nameError', 'Please enter your full name');
+            } else {
+                this.classList.remove('error');
+                document.getElementById('nameError').style.display = 'none';
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('email', 'emailError', 'Please enter your email address');
+            } else if (!isValidEmail(this.value)) {
+                showError('email', 'emailError', 'Please enter a valid email address');
+            } else {
+                this.classList.remove('error');
+                document.getElementById('emailError').style.display = 'none';
+            }
+        });
+
+        document.getElementById('message').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('message', 'messageError', 'Please enter your message');
+            } else {
+                this.classList.remove('error');
+                document.getElementById('messageError').style.display = 'none';
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

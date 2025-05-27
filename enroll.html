@@ -109,8 +109,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            /* border-radius: 8px; */
-            /* background: var(--gradient-1); */
         }
 
         .logo-icon img {
@@ -192,65 +190,52 @@
             padding: 0.5rem;
         }
 
-        /* Main Content */
+       /* Main Content */
         .main-content {
             margin-top: 80px;
             min-height: 100vh;
         }
-.enroll-hero {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* or whatever height you prefer */
-    overflow: hidden;
-}
 
-.enroll-hero-video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.enroll-hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.enroll-hero-video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-}
-
-.enroll-hero-container {
-    position: relative;
-    z-index: 1;
-    /* Add your existing container styles here */
-}
         /* Enrollment Hero Section */
         .enroll-hero {
-            padding: 6rem 0 4rem;
-            background: var(--dark-bg);
             position: relative;
+            width: 100%;
+            height: 100vh;
+            padding: 6rem 0 4rem;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .enroll-hero-background {
+        /* Video Container */
+        .enroll-hero-video-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 99, 132, 0.1) 0%, transparent 50%);
+            z-index: 0;
         }
 
+        .enroll-hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Video Overlay */
+        .enroll-hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Content Container */
         .enroll-hero-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -258,8 +243,10 @@
             position: relative;
             z-index: 2;
             text-align: center;
+            animation: fadeInUp 1.2s ease-out;
         }
 
+        /* Text Styling */
         .enroll-hero-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 3rem;
@@ -269,13 +256,47 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .enroll-hero-subtitle {
             font-size: 1.25rem;
-            color: var(--text-secondary);
+            color: #e0e6ff;
             max-width: 700px;
             margin: 0 auto 3rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+
+        /* Remove the old background styles */
+        .enroll-hero-background {
+            display: none;
+        }
+
+        /* Video controls */
+        .video-controls {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 4;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .video-control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         /* Form Section */
@@ -382,7 +403,6 @@
             gap: 0.75rem;
             padding: 0.5rem;
             border-radius: 6px;
-            transition: background 0.3s ease;
         }
 
         .checkbox-item:hover {
@@ -593,31 +613,58 @@
             transform: translateY(-2px);
         }
 
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: block;
             }
-
+  
             .nav-menu {
                 position: fixed;
-                top: 90px;
-                right: 0;
-                width: 70%;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: calc(100% - 80px);
                 background: var(--darker-bg);
                 flex-direction: column;
                 padding: 2rem;
                 gap: 1.5rem;
-                border: 1px solid var(--border-color);
-                border-radius: 0 0 0 20px;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
+                border-left: 1px solid var(--border-color);
+                transition: right 0.3s ease;
                 z-index: 999;
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                overflow-y: auto;
             }
 
             .nav-menu.active {
-                transform: translateX(0);
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border-color);
+                text-align: center;
             }
 
             .enroll-hero-title {
@@ -665,6 +712,9 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -696,258 +746,138 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-    <section class="enroll-hero">
+<main class="main-content">
+  <section class="enroll-hero">
     <div class="enroll-hero-video-container">
-        <video class="enroll-hero-video" autoplay muted loop playsinline>
-            <source src="/media/Landing-Page-Video.mp4" type="video/mp4">
-            <!-- Add additional source elements for other formats if needed -->
-            Your browser does not support the video tag.
+        <video autoplay muted loop playsinline class="enroll-hero-video">
+            <source src="./media/Landing-Page-Video.mp4" type="video/mp4">
         </video>
         <div class="enroll-hero-video-overlay"></div>
     </div>
+    
     <div class="enroll-hero-container">
-        <h1 class="enroll-hero-title">Start Your Tech Journey</h1>
+        <h1 class="enroll-hero-title">Join TEKK Bridge Academy</h1>
         <p class="enroll-hero-subtitle">
-            Join thousands of students who have transformed their careers through our comprehensive tech programs. 
-            Fill out the form below to begin your enrollment process.
+            Transform your future with cutting-edge technology education. 
+            Fill out the form below to begin your journey with us.
         </p>
     </div>
 </section>
+</main>
 
         <!-- Form Section -->
         <section class="form-section">
             <div class="form-container">
-                <form class="enrollment-form" id="admissionForm">
-                    <!-- Personal Information -->
-                    <div class="section-title">
-                        <i class="fas fa-user"></i> Personal Information
-                    </div>
+                <form class="enrollment-form" id="enrollmentForm">
+                    <h2 class="section-title">Personal Information</h2>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
-                        </div>
-                        <div class="form-group">
-                            <label for="middleName">Middle Name</label>
-                            <input type="text" id="middleName" name="middleName" placeholder="Enter your middle name">
+                            <input type="text" id="firstName" name="firstName" required>
                         </div>
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                            <input type="text" id="lastName" name="lastName" required>
                         </div>
                     </div>
 
-                    <!-- Birth Date -->
-                    <div class="section-title">
-                        <i class="fas fa-calendar"></i> Birth Date
-                    </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="birthMonth">Month *</label>
-                            <select id="birthMonth" name="birthMonth" required>
-                                <option value="">Please select a month</option>
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="birthDate">Date *</label>
-                            <select id="birthDate" name="birthDate" required>
-                                <option value="">Please select a day</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="birthYear">Year *</label>
-                            <select id="birthYear" name="birthYear" required>
-                                <option value="">Please select a year</option>
-                            </select>
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
                         </div>
                     </div>
 
-                    <!-- Gender -->
                     <div class="form-group">
-                        <label>Gender *</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="male" name="gender" value="Male" required>
-                                <label for="male">Male</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="female" name="gender" value="Female" required>
-                                <label for="female">Female</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="others" name="gender" value="Others" required>
-                                <label for="others">Others</label>
-                            </div>
-                        </div>
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="3" placeholder="Street address, city, state, zip code"></textarea>
                     </div>
 
-                    <!-- Course Selection -->
-                    <div class="section-title">
-                        <i class="fas fa-laptop-code"></i> Course Selection
-                    </div>
+                    <h2 class="section-title">Course Preferences</h2>
+                    
                     <div class="form-group">
                         <label>Select Courses of Interest *</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course1" name="courses" value="Introduction to Computer Science">
-                                <label for="course1">Introduction to Computer Science</label>
+                                <input type="checkbox" id="webdev" name="courses" value="Web Development">
+                                <label for="webdev">Web Development</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course2" name="courses" value="Data Structures">
-                                <label for="course2">Data Structures</label>
+                                <input type="checkbox" id="mobile" name="courses" value="Mobile App Development">
+                                <label for="mobile">Mobile App Development</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course3" name="courses" value="Algorithms">
-                                <label for="course3">Algorithms</label>
+                                <input type="checkbox" id="data" name="courses" value="Data Science">
+                                <label for="data">Data Science</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course4" name="courses" value="Operating Systems">
-                                <label for="course4">Operating Systems</label>
+                                <input type="checkbox" id="ai" name="courses" value="Artificial Intelligence">
+                                <label for="ai">Artificial Intelligence</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course5" name="courses" value="Database Systems">
-                                <label for="course5">Database Systems</label>
+                                <input type="checkbox" id="cyber" name="courses" value="Cybersecurity">
+                                <label for="cyber">Cybersecurity</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="course6" name="courses" value="Software Engineering">
-                                <label for="course6">Software Engineering</label>
+                                <input type="checkbox" id="cloud" name="courses" value="Cloud Computing">
+                                <label for="cloud">Cloud Computing</label>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course7" name="courses" value="Computer Networks">
-                                <label for="course7">Computer Networks</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course8" name="courses" value="Artificial Intelligence">
-                                <label for="course8">Artificial Intelligence</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course9" name="courses" value="Machine Learning">
-                                <label for="course9">Machine Learning</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course10" name="courses" value="Cybersecurity">
-                                <label for="course10">Cybersecurity</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course11" name="courses" value="Human-Computer Interaction">
-                                <label for="course11">Human-Computer Interaction</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course12" name="courses" value="Web Development">
-                                <label for="course12">Web Development</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course13" name="courses" value="Mobile Application Development">
-                                <label for="course13">Mobile Application Development</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course14" name="courses" value="Cloud Computing">
-                                <label for="course14">Cloud Computing</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="course15" name="courses" value="Big Data Analytics">
-                                <label for="course15">Big Data Analytics</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Information -->
-                    <div class="section-title">
-                        <i class="fas fa-envelope"></i> Contact Information
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="citizenship">Country of Citizenship *</label>
-                        <select id="citizenship" name="citizenship" required>
-                            <option value="">Please Select</option>
-                            <option value="Afghanistan">Afghanistan</option>
-                            <option value="Albania">Albania</option>
-                            <option value="Algeria">Algeria</option>
-                            <option value="Andorra">Andorra</option>
-                            <option value="Angola">Angola</option>
-                            <option value="United States">United States</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Nigeria">Nigeria</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="Kenya">Kenya</option>
-                            <option value="Ghana">Ghana</option>
-                            <option value="Egypt">Egypt</option>
-                            <option value="India">India</option>
-                            <option value="China">China</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Germany">Germany</option>
-                            <option value="France">France</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Mexico">Mexico</option>
-                            <option value="Argentina">Argentina</option>
-                        </select>
+                        <label>Preferred Learning Format *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="online" name="format" value="Online" required>
+                                <label for="online">Online</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hybrid" name="format" value="Hybrid" required>
+                                <label for="hybrid">Hybrid</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="inperson" name="format" value="In-Person" required>
+                                <label for="inperson">In-Person</label>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Additional Information -->
-                    <div class="section-title">
-                        <i class="fas fa-info-circle"></i> Additional Information
-                    </div>
-                    
                     <div class="form-group">
-                        <label for="experience">Previous Programming Experience</label>
+                        <label for="experience">Programming Experience Level</label>
                         <select id="experience" name="experience">
-                            <option value="">Please Select</option>
-                            <option value="None">No Experience</option>
-                            <option value="Beginner">Beginner (0-1 years)</option>
-                            <option value="Intermediate">Intermediate (1-3 years)</option>
-                            <option value="Advanced">Advanced (3+ years)</option>
+                            <option value="">Select your level</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                            <option value="Expert">Expert</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="motivation">Why do you want to join TEKK Bridge Academy? *</label>
-                        <textarea id="motivation" name="motivation" rows="4" required placeholder="Tell us about your goals and motivation for joining our academy..."></textarea>
+                        <label for="goals">Learning Goals</label>
+                        <textarea id="goals" name="goals" rows="4" placeholder="What do you hope to achieve through our programs?"></textarea>
                     </div>
 
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i> Submit Application
+                        Submit Enrollment
                     </button>
 
                     <div class="loading" id="loading">
-                        <i class="fas fa-spinner fa-spin"></i> Submitting your application...
+                        <i class="fas fa-spinner fa-spin"></i> Submitting your enrollment...
                     </div>
 
                     <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i> Application submitted successfully! We'll contact you soon.
+                        Thank you for your enrollment! We'll contact you within 24 hours.
                     </div>
 
                     <div class="error-message" id="errorMessage">
-                        <i class="fas fa-exclamation-circle"></i> There was an error submitting your application. Please try again.
+                        There was an error submitting your form. Please try again.
                     </div>
                 </form>
             </div>
@@ -960,11 +890,11 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>TEKK Bridge Academy</h3>
-                    <p>Empowering the next generation of tech innovators through comprehensive education and hands-on experience.</p>
+                    <p>Empowering the next generation of tech professionals through innovative education and hands-on learning experiences.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
@@ -974,8 +904,7 @@
                     <div class="footer-links">
                         <a href="index.html">Home</a>
                         <a href="About.html">About Us</a>
-                        <a href="#features">Programs</a>
-                        <a href="Enroll.html">Enroll Now</a>
+                        <a href="index.html#features">Features</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -984,10 +913,9 @@
                     <h3>Programs</h3>
                     <div class="footer-links">
                         <a href="#">Web Development</a>
+                        <a href="#">Mobile Development</a>
                         <a href="#">Data Science</a>
-                        <a href="#">Cybersecurity</a>
                         <a href="#">AI & Machine Learning</a>
-                        <a href="#">Cloud Computing</a>
                     </div>
                 </div>
                 
@@ -1002,21 +930,20 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 TEKK Bridge Academy. All rights reserved.</p>
+                <p>&copy; 2025 TEKK Bridge Academy. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize EmailJS
-        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
-
         // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 
-        mobileMenuToggle.addEventListener('click', function() {
+        function toggleMobileMenu() {
             navMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
             
             // Toggle hamburger icon
             const icon = mobileMenuToggle.querySelector('i');
@@ -1027,34 +954,24 @@
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
-        });
+        }
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when overlay is clicked
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a nav link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                if (navMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
             });
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = navMenu.contains(event.target);
-            const isClickOnToggle = mobileMenuToggle.contains(event.target);
-            
-            if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
         // Navbar scroll effect
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -1063,190 +980,10 @@
             }
         });
 
-        // Populate birth date options
-        function populateBirthDate() {
-            const birthDateSelect = document.getElementById('birthDate');
-            for (let i = 1; i <= 31; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                birthDateSelect.appendChild(option);
-            }
-        }
-
-        // Populate birth year options
-        function populateBirthYear() {
-            const birthYearSelect = document.getElementById('birthYear');
-            const currentYear = new Date().getFullYear();
-            const startYear = currentYear - 80; // 80 years back
-            const endYear = currentYear - 13; // Must be at least 13 years old
-
-            for (let year = endYear; year >= startYear; year--) {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = year;
-                birthYearSelect.appendChild(option);
-            }
-        }
-
-        // Update days based on selected month and year
-        function updateDaysInMonth() {
-            const monthSelect = document.getElementById('birthMonth');
-            const yearSelect = document.getElementById('birthYear');
-            const dateSelect = document.getElementById('birthDate');
-            
-            const selectedMonth = monthSelect.value;
-            const selectedYear = parseInt(yearSelect.value);
-            
-            if (selectedMonth && selectedYear) {
-                const monthIndex = new Date(Date.parse(selectedMonth + " 1, 2000")).getMonth();
-                const daysInMonth = new Date(selectedYear, monthIndex + 1, 0).getDate();
-                
-                // Clear existing options except the first one
-                dateSelect.innerHTML = '<option value="">Please select a day</option>';
-                
-                // Add new options
-                for (let i = 1; i <= daysInMonth; i++) {
-                    const option = document.createElement('option');
-                    option.value = i;
-                    option.textContent = i;
-                    dateSelect.appendChild(option);
-                }
-            }
-        }
-
-        // Form validation
-        function validateForm() {
-            const requiredFields = document.querySelectorAll('[required]');
-            let isValid = true;
-            let firstInvalidField = null;
-
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#ef4444';
-                    isValid = false;
-                    if (!firstInvalidField) {
-                        firstInvalidField = field;
-                    }
-                } else {
-                    field.style.borderColor = '#2d2d44';
-                }
-            });
-
-            // Check if at least one course is selected
-            const courseCheckboxes = document.querySelectorAll('input[name="courses"]:checked');
-            if (courseCheckboxes.length === 0) {
-                const courseGroup = document.querySelector('.checkbox-group');
-                courseGroup.style.borderColor = '#ef4444';
-                isValid = false;
-                
-                if (!firstInvalidField) {
-                    firstInvalidField = courseGroup;
-                }
-            } else {
-                const courseGroup = document.querySelector('.checkbox-group');
-                courseGroup.style.borderColor = '#2d2d44';
-            }
-
-            if (!isValid && firstInvalidField) {
-                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
-            return isValid;
-        }
-
-        // Form submission
-        document.getElementById('admissionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!validateForm()) {
-                showError('Please fill in all required fields and select at least one course.');
-                return;
-            }
-
-            const submitBtn = document.getElementById('submitBtn');
-            const loading = document.getElementById('loading');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-
-            // Show loading state
-            submitBtn.disabled = true;
-            loading.style.display = 'block';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-
-            // Collect form data
-            const formData = new FormData(this);
-            const data = {};
-            
-            // Handle regular form fields
-            for (let [key, value] of formData.entries()) {
-                if (key === 'courses') {
-                    if (!data[key]) data[key] = [];
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
-                }
-            }
-
-            // Convert courses array to string
-            if (data.courses) {
-                data.courses = data.courses.join(', ');
-            }
-
-            // Simulate form submission (replace with actual EmailJS call)
-            setTimeout(() => {
-                // Uncomment and configure the following for actual EmailJS integration:
-                
-                emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", data)
-                    .then(function(response) {
-                        showSuccess();
-                        document.getElementById('admissionForm').reset();
-                    })
-                    .catch(function(error) {
-                        showError('Failed to submit application. Please try again.');
-                    })
-                    .finally(() => {
-                        submitBtn.disabled = false;
-                        loading.style.display = 'none';
-                    });
-                
-                
-                // For demo purposes, simulate success
-                showSuccess();
-                document.getElementById('admissionForm').reset();
-                submitBtn.disabled = false;
-                loading.style.display = 'none';
-            }, 2000);
-        });
-
-        function showSuccess() {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 5000);
-        }
-
-        function showError(message) {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-            errorMessage.style.display = 'block';
-            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Hide error message after 5 seconds
-            setTimeout(() => {
-                errorMessage.style.display = 'none';
-            }, 5000);
-        }
-
         // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', function() {
-            // This is a placeholder for theme switching functionality
+        themeToggle.addEventListener('click', () => {
+            // Add your theme switching logic here
             const icon = themeToggle.querySelector('i');
             if (icon.classList.contains('fa-moon')) {
                 icon.classList.remove('fa-moon');
@@ -1257,53 +994,197 @@
             }
         });
 
-        // Newsletter form submission
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+        // Form submission handling with EmailJS
+        const enrollmentForm = document.getElementById('enrollmentForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        enrollmentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = this.querySelector('.newsletter-input').value;
-            if (email) {
-                alert('Thank you for subscribing to our newsletter!');
-                this.reset();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            // Collect form data
+            const formData = new FormData(enrollmentForm);
+            const data = {};
+            
+            // Handle regular form fields
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'courses') {
+                    data[key] = value;
+                }
+            }
+            
+            // Handle checkboxes for courses
+            const selectedCourses = [];
+            const courseCheckboxes = document.querySelectorAll('input[name="courses"]:checked');
+            courseCheckboxes.forEach(checkbox => {
+                selectedCourses.push(checkbox.value);
+            });
+            data.courses = selectedCourses;
+
+            try {
+                // Use EmailJS for actual form submission
+                await submitFormWithEmailJS(data);
+                
+                // Show success message
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+                enrollmentForm.reset();
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                
+                // Scroll to error message
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } finally {
+                submitBtn.disabled = false;
             }
         });
 
-        // Initialize form elements
-        document.addEventListener('DOMContentLoaded', function() {
-            populateBirthDate();
-            populateBirthYear();
-            
-            // Add event listeners for date validation
-            document.getElementById('birthMonth').addEventListener('change', updateDaysInMonth);
-            document.getElementById('birthYear').addEventListener('change', updateDaysInMonth);
+        // Newsletter form handling
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Thank you for subscribing to our newsletter!');
+                newsletterForm.reset();
+            }
         });
 
-        // Real-time validation
-        document.querySelectorAll('input, select, textarea').forEach(field => {
-            field.addEventListener('blur', function() {
-                if (this.hasAttribute('required') && !this.value.trim()) {
-                    this.style.borderColor = '#ef4444';
+        // Form validation enhancements
+        const requiredFields = document.querySelectorAll('input[required], select[required]');
+        requiredFields.forEach(field => {
+            field.addEventListener('blur', () => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = 'var(--error-color)';
                 } else {
-                    this.style.borderColor = '#2d2d44';
+                    field.style.borderColor = 'var(--border-color)';
                 }
             });
 
-            field.addEventListener('input', function() {
-                if (this.style.borderColor === 'rgb(239, 68, 68)' && this.value.trim()) {
-                    this.style.borderColor = '#2d2d44';
+            field.addEventListener('input', () => {
+                if (field.value.trim()) {
+                    field.style.borderColor = 'var(--success-color)';
                 }
             });
         });
 
         // Course selection validation
-        document.querySelectorAll('input[name="courses"]').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const checkedCourses = document.querySelectorAll('input[name="courses"]:checked');
-                const courseGroup = document.querySelector('.checkbox-group');
-                
-                if (checkedCourses.length > 0) {
-                    courseGroup.style.borderColor = '#2d2d44';
+        const courseCheckboxes = document.querySelectorAll('input[name="courses"]');
+        const submitButton = document.getElementById('submitBtn');
+
+        function validateCourseSelection() {
+            const selectedCourses = document.querySelectorAll('input[name="courses"]:checked');
+            if (selectedCourses.length === 0) {
+                document.querySelector('.checkbox-group').style.borderColor = 'var(--error-color)';
+                return false;
+            } else {
+                document.querySelector('.checkbox-group').style.borderColor = 'var(--success-color)';
+                return true;
+            }
+        }
+
+        courseCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', validateCourseSelection);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
+
+        // Initialize EmailJS for actual form submission
+        // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+        emailjs.init("YOUR_PUBLIC_KEY");
+
+        // EmailJS form submission function
+        async function submitFormWithEmailJS(formData) {
+            try {
+                // Format the courses array for email
+                const coursesText = formData.courses.length > 0 ? formData.courses.join(', ') : 'None selected';
+                
+                // Prepare template parameters for EmailJS
+                const templateParams = {
+                    to_name: 'TEKK Bridge Academy',
+                    from_name: `${formData.firstName} ${formData.lastName}`,
+                    from_email: formData.email,
+                    phone: formData.phone,
+                    address: formData.address || 'Not provided',
+                    courses: coursesText,
+                    learning_format: formData.format,
+                    experience_level: formData.experience || 'Not specified',
+                    learning_goals: formData.goals || 'Not provided',
+                    message: `New enrollment application from ${formData.firstName} ${formData.lastName}
+                    
+Email: ${formData.email}
+Phone: ${formData.phone}
+Address: ${formData.address || 'Not provided'}
+Selected Courses: ${coursesText}
+Preferred Format: ${formData.format}
+Experience Level: ${formData.experience || 'Not specified'}
+Learning Goals: ${formData.goals || 'Not provided'}`
+                };
+
+                // Send email using EmailJS
+                // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
+                const response = await emailjs.send(
+                    'YOUR_SERVICE_ID',
+                    'YOUR_TEMPLATE_ID', 
+                    templateParams
+                );
+
+                console.log('Email sent successfully:', response);
+                return { success: true };
+                
+            } catch (error) {
+                console.error('EmailJS error:', error);
+                throw error;
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe form sections for entrance animations
+        document.querySelectorAll('.form-section, .enroll-hero').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
         });
     </script>
 </body>
