@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- EmailJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <style>
         * {
@@ -1114,55 +1115,71 @@
                 }
             });
         });
+// Initialize EmailJS with proper error handling
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        emailjs.init("05HtkGoU6zkLhbUoq");
+        console.log("EmailJS initialized successfully");
+    } catch (error) {
+        console.error("EmailJS initialization failed:", error);
+    }
+});
 
-        // Initialize EmailJS for actual form submission
-        // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-        emailjs.init("YOUR_PUBLIC_KEY");
+// Improved EmailJS form submission function
+async function submitFormWithEmailJS(formData) {
+    try {
+        // Verify EmailJS is properly initialized
+        if (!window.emailjs || !window.emailjs.send) {
+            throw new Error("EmailJS not properly initialized");
+        }
 
-        // EmailJS form submission function
-        async function submitFormWithEmailJS(formData) {
-            try {
-                // Format the courses array for email
-                const coursesText = formData.courses.length > 0 ? formData.courses.join(', ') : 'None selected';
-                
-                // Prepare template parameters for EmailJS
-                const templateParams = {
-                    to_name: 'TEKK Bridge Academy',
-                    from_name: `${formData.firstName} ${formData.lastName}`,
-                    from_email: formData.email,
-                    phone: formData.phone,
-                    address: formData.address || 'Not provided',
-                    courses: coursesText,
-                    learning_format: formData.format,
-                    experience_level: formData.experience || 'Not specified',
-                    learning_goals: formData.goals || 'Not provided',
-                    message: `New enrollment application from ${formData.firstName} ${formData.lastName}
-                    
-Email: ${formData.email}
-Phone: ${formData.phone}
+        // Format the courses array for email
+        const coursesText = formData.courses && formData.courses.length > 0 
+            ? formData.courses.join(', ') 
+            : 'None selected';
+        
+        // Prepare template parameters for EmailJS
+        const templateParams = {
+            to_name: 'TEKK Bridge Academy',
+            from_name: `${formData.firstName || ''} ${formData.lastName || ''}`.trim(),
+            from_email: formData.email || 'no-email-provided@example.com',
+            phone: formData.phone || 'Not provided',
+            address: formData.address || 'Not provided',
+            courses: coursesText,
+            learning_format: formData.format || 'Not specified',
+            experience_level: formData.experience || 'Not specified', // Note: typo in 'experience'?
+            learning_goals: formData.goals || 'Not provided', // Note: typo in 'goals'?
+            message: `New enrollment application from ${formData.firstName || ''} ${formData.lastName || ''}
+            
+Email: ${formData.email || 'Not provided'}
+Phone: ${formData.phone || 'Not provided'}
 Address: ${formData.address || 'Not provided'}
 Selected Courses: ${coursesText}
-Preferred Format: ${formData.format}
+Preferred Format: ${formData.format || 'Not specified'}
 Experience Level: ${formData.experience || 'Not specified'}
 Learning Goals: ${formData.goals || 'Not provided'}`
-                };
+        };
 
-                // Send email using EmailJS
-                // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-                const response = await emailjs.send(
-                    'YOUR_SERVICE_ID',
-                    'YOUR_TEMPLATE_ID', 
-                    templateParams
-                );
+        // Send email using EmailJS
+        const response = await emailjs.send(
+            'service_luoah9e', // Your service ID
+            'template_b8ynzam', // Your template ID
+            templateParams
+        );
 
-                console.log('Email sent successfully:', response);
-                return { success: true };
-                
-            } catch (error) {
-                console.error('EmailJS error:', error);
-                throw error;
-            }
-        }
+        console.log('Email sent successfully:', response);
+        return { success: true, response };
+        
+    } catch (error) {
+        console.error('EmailJS error:', error);
+        // Return more detailed error information
+        return { 
+            success: false, 
+            error: error.message || 'Unknown error',
+            details: error 
+        };
+    }
+}
 
         // Intersection Observer for animations
         const observerOptions = {
